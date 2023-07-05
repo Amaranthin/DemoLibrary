@@ -14,7 +14,7 @@ namespace DemoLibrary
         {
             try
             {
-                string filePath = "..\\..\\DataFiles\\books";
+                string filePath = "..\\..\\DataFiles\\books.txt";
                 //Относителна адресация
 
                 ReadBooksFromFile(filePath);
@@ -25,7 +25,7 @@ namespace DemoLibrary
                     Console.WriteLine($"Книга: {book.Title}, Автор: {book.Author}, Година: {book.Year}, Цена: {book.Price}");
                 }
 
-                string outputFilePath = "..outputFile.txt";
+                string outputFilePath = "..\\..\\DataFiles\\outputFile.txt";
                 WriteBooksToFile(outputFilePath);
 
                 Console.WriteLine("Данните са записани успешно в новия файл.");
@@ -44,7 +44,7 @@ namespace DemoLibrary
 
         static void ReadBooksFromFile(string filePath)
         {
-            using (StreamReader sr = new StreamReader(filePath, Encoding.GetEncoding("windows-1251")))
+            using (StreamReader sr = new StreamReader(filePath, Encoding.GetEncoding("utf-8")))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -68,7 +68,7 @@ namespace DemoLibrary
         static void WriteBooksToFile(string filePath)
         {
             using (StreamWriter sw = new StreamWriter(filePath, false,
-                    Encoding.GetEncoding("windows-1251")))
+                    Encoding.GetEncoding("utf-8")))
             {
                 foreach (Book book in books)
                 {
