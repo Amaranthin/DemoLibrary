@@ -65,6 +65,11 @@ namespace DemoLibrary
             }
         }
 
+        static void BranchTestMethod()
+        {
+            Console.WriteLine("alabala");
+        }
+
         static void WriteBooksToFile(string filePath)
         {
             using (StreamWriter sw = new StreamWriter(filePath, false,
