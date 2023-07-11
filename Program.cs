@@ -9,6 +9,7 @@ namespace DemoLibrary
     {
 
         static ArrayList books = new ArrayList();
+        static string antetka = "";
 
         static void Main(string[] args)
         {
@@ -47,11 +48,15 @@ namespace DemoLibrary
             using (StreamReader sr = new StreamReader(filePath, Encoding.GetEncoding("utf-8")))
             {
                 string line;
+
+                int row = 0;
+
                 while ((line = sr.ReadLine()) != null)
                 {
+                   
                     string[] bookData = line.Split(',');
 
-                    if (bookData.Length == 4)
+                    if (bookData.Length == 4 && row !=0)
                     {
                         string title = bookData[0];
                         string author = bookData[1];
@@ -61,20 +66,31 @@ namespace DemoLibrary
                         Book book = new Book(title, author, year, price);
                         books.Add(book);
                     }
+                    else
+                    {
+                        if (row==0)
+                        {
+                            antetka = line;
+                        }
+ 
+                        if (bookData.Length != 4)
+                        {
+                            Console.WriteLine($"Некоректни данни в ред {row}");
+                        }
+                    }
+                    row++;
                 }
             }
         }
 
-        static void BranchTestMethod()
-        {
-            Console.WriteLine("alabala");
-        }
-
         static void WriteBooksToFile(string filePath)
         {
+            
             using (StreamWriter sw = new StreamWriter(filePath, false,
                     Encoding.GetEncoding("utf-8")))
             {
+                sw.WriteLine(antetka);
+
                 foreach (Book book in books)
                 {
                     string line = $"{book.Title},{book.Author},{book.Year},{book.Price}";
